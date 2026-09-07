@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/components/ui/bouton'
 
 const navItems = ['Accueil', 'Services', 'À propos', 'Contact']
 
@@ -8,11 +8,8 @@ export default function NavBar() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
         <a href="#" className="flex items-center gap-3" aria-label="Accueil">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-transparent overflow-hidden">
-            <img src="/LOGOS.png" alt="Logo de l'application" className="h-10 w-10 object-contain" />
+            <img src="/LOGOS.png" alt="Logo de l'application" className="h-15 w-15 object-contain" />
           </div>
-            {/* <p className="text-lg font-semibold tracking-tight text-slate-900">Soutenance</p>
-            <p className="text-[10px] uppercase tracking-[0.2em] text-slate-500">2026</p> */}
-         
         </a>
 
         <div className="hidden items-center gap-8 md:flex">
