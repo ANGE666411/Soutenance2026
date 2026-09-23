@@ -1,169 +1,118 @@
 @import "tailwindcss";
-/* :root {
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
 
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
-  letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  @media (max-width: 1024px) {
-    font-size: 16px;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
+  body {
+    background-color: #020617;
+    color: #f8fafc;
+    overflow-x: hidden;
   }
 }
 
-#root {
-  width: 1126px;
-  max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
-  min-height: 100svh;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-}
+/* ------------------ Animations Haute Performance ------------------ */
 
-body {
-  margin: 0;
-}
-
-h1,
-h2 {
-  font-family: var(--heading);
-  font-weight: 500;
-  color: var(--text-h);
-}
-
-h1 {
-  font-size: 56px;
-  letter-spacing: -1.68px;
-  margin: 32px 0;
-  @media (max-width: 1024px) {
-    font-size: 36px;
-    margin: 20px 0;
+@keyframes radar-sweep {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
-h2 {
-  font-size: 24px;
-  line-height: 118%;
-  letter-spacing: -0.24px;
-  margin: 0 0 8px;
-  @media (max-width: 1024px) {
-    font-size: 20px;
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.85;
+    transform: scale(1.08);
   }
 }
-p {
-  margin: 0;
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
+@keyframes scan-line {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
 }
 
-code {
-  font-size: 15px;
-  line-height: 135%;
-  padding: 4px 8px;
-  background: var(--code-bg);
-} */
-
-/* ------------------ Animations pour les cercles en orbite ------------------ */
-/*
-  J'ajoute ici les règles CSS nécessaires pour faire tourner un groupe de
-  petits cercles autour d'un cercle central fixe. J'ai commenté chaque
-  partie pour me rappeler pourquoi je l'ai faite et comment la régler.
-
-  Utilisation :
-  - `.orbit-motion` anime la rotation globale (contrôlable via --orbit-duration).
-  - `.counter-spin` annule la rotation pour que l'icône reste droite.
-  - `.orbit-wrapper`, `.orbit-center`, `.orbit-item` sont des utilitaires
-    de positionnement utilisés par le composant React `OrbitGroup`.
-
-  Exemple rapide :
-    <div class="orbit-wrapper">
-      <div class="orbit-motion" style="--orbit-duration:14s">
-        <!-- items positionnés par transform: rotate(angle) translateX(radius) -->
-      </div>
-      <div class="orbit-center"> <!-- cercle central fixe --> </div>
-    </div>
-
-  Remarques :
-  - Je préfère animer la transformation (rotate) pour rester GPU-accéléré.
-  - Modifier --orbit-duration permet d'ajuster la vitesse sans toucher le CSS.
-*/
-
-@keyframes orbit-spin {
-  to { transform: rotate(360deg); }
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
-/*element animé qui fait tourner tous les éléments autour du centre */
-.orbit-motion {
-  /* make the animated wrapper fill the parent so the rotation origin is exact */
-  position: absolute;
-  inset: 0;
-  animation: orbit-spin var(--orbit-duration, 12s) linear infinite;
+.animate-radar {
+  animation: radar-sweep 4s linear infinite;
   transform-origin: center;
-  will-change: transform;
 }
 
-/* contre-rotation pour que le contenu reste lisible (annule la rotation) */
-.counter-spin {
-  animation: orbit-spin var(--orbit-duration, 12s) linear infinite reverse;
-  transform-origin: center;
-  will-change: transform;
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
 }
 
-/* utilitaires de positionnement pour le groupe et les items */
-.orbit-wrapper { position: relative; display: block; }
-.orbit-center { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; pointer-events: none; }
-.orbit-item { position: absolute; top: 50%; left: 50%; transform-origin: center; pointer-events: auto; }
+.animate-float {
+  animation: float-slow 4s ease-in-out infinite;
+}
 
-/* petits ajustements visuels par défaut pour les badges (facultatif) */
-.orbit-item .circle-badge { box-shadow: 0 6px 18px rgba(2,6,23,0.12); }
+.animate-scan-line {
+  animation: scan-line 2.5s ease-in-out infinite;
+}
 
-/* fin des règles d'orbite */
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 2.5s infinite;
+}
 
+/* Glassmorphism helpers */
+.glass-panel {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-panel-glow {
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  box-shadow: 0 0 25px -5px rgba(16, 185, 129, 0.15);
+}
+
+/* Masquage de la scrollbar sur les modules défilants */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
